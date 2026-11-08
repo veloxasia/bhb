@@ -1,0 +1,33 @@
+{
+  "name": "minecraft-human-builder",
+  "version": "1.23.0",
+  "private": true,
+  "description": "Construction-aware, physically constrained Minecraft schematic builder.",
+  "main": "start-render.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20 <27"
+  },
+  "scripts": {
+    "start": "node start-render.js",
+    "cli": "node src/index.js",
+    "gui": "node start-render.js",
+    "render": "node start-render.js",
+    "validate": "node scripts/validate.js",
+    "test": "node --test tests/*.test.js",
+    "check": "npm run validate && npm test",
+    "preflight": "node scripts/preflight.js",
+    "plan": "node scripts/plan-report.js",
+    "sim": "node tests/sim/fullbuild.js",
+    "verify-token": "node scripts/verify-token.js"
+  },
+  "dependencies": {
+    "mineflayer": "4.39.0",
+    "mineflayer-pathfinder": "https://github.com/PrismarineJS/mineflayer-pathfinder/archive/refs/heads/master.tar.gz",
+    "minecraft-data": "3.117.0",
+    "prismarine-block": "1.23.0",
+    "prismarine-schematic": "1.3.0",
+    "prismarine-world": "3.7.0",
+    "vec3": "0.1.10"
+  }
+}

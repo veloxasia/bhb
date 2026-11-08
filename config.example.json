@@ -1,0 +1,176 @@
+{
+  "server": {
+    "host": "",
+    "port": 25565,
+    "version": "",
+    "autoReconnect": true,
+    "reconnectDelayMs": 15000,
+    "resumeOnStart": false
+  },
+  "control": {
+    "allowedUsers": [],
+    "chatPrefix": "!",
+    "chatCommands": false,
+    "announceInChat": false,
+    "defaultSchematic": "",
+    "defaultRotation": 0
+  },
+  "shop": {
+    "enabled": true,
+    "command": "/shop",
+    "openTimeoutMs": 7000,
+    "commandCooldownMs": 5000,
+    "clickDelayMs": [
+      450,
+      1100
+    ],
+    "afterOpenDelayMs": [
+      500,
+      1100
+    ],
+    "maxClicksPerVisit": 36,
+    "stacksPerVisit": 3,
+    "pages": 4,
+    "nextPageMatch": "next|siguiente|>>|»|›|→",
+    "notSoldRetryMs": 600000,
+    "items": {}
+  },
+  "materials": {
+    "toolItems": [
+      "diamond_pickaxe",
+      "diamond_axe",
+      "diamond_shovel"
+    ],
+    "foodItem": "cooked_beef",
+    "autoBreakObstructions": true,
+    "neverBreakContainers": true
+  },
+  "dig": {
+    "marginMs": [
+      70,
+      170
+    ],
+    "rejectLimit": 3,
+    "protectedCooldownMs": 90000,
+    "settleAfterEquipMs": [
+      120,
+      260
+    ]
+  },
+  "human": {
+    "strict": true,
+    "placeIntervalMs": [
+      320,
+      650
+    ],
+    "betweenActionsMs": [
+      160,
+      420
+    ],
+    "microPauseEveryActions": [
+      14,
+      34
+    ],
+    "microPauseMs": [
+      900,
+      3200
+    ]
+  },
+  "fleet": {
+    "joinDelayMs": 12000,
+    "minGap": 6,
+    "viewDistance": 6,
+    "mode": "auto",
+    "deadAfterMs": 90000,
+    "lookAheadOrders": 12,
+    "maxBlockingSearchMs": 1200
+  },
+  "navigation": {
+    "thinkTimeoutMs": 12000,
+    "tickTimeoutMs": 40,
+    "stuckTimeoutMs": 6000,
+    "unstickAfterMs": 1500,
+    "maxPathDistance": 512,
+    "parkour": false,
+    "allowBreaking": false,
+    "allowPlacing": false,
+    "useHumanController": true,
+    "humanSeed": 1337,
+    "chunkPreloadTimeoutMs": 30000,
+    "chunkPreloadWarningOnly": true,
+    "minLoadedChunkColumns": 9,
+    "placementReach": 4.5,
+    "placementThinkTimeoutMs": 8000,
+    "personality": {
+      "sprints": true,
+      "sprintDelay": 0,
+      "reaction": 0.08,
+      "turnTime": 0.45,
+      "jumpRate": 0,
+      "glanceRate": 0,
+      "deadband": 0.12
+    },
+    "rescueDig": true,
+    "pearls": false,
+    "ramps": true,
+    "rampMaxRise": 14,
+    "rampMaxBlocks": 110,
+    "rampTimeoutMs": 240000
+  },
+  "building": {
+    "maxRetriesPerAction": 6,
+    "rescanEveryActions": 96,
+    "saveEveryActions": 32,
+    "allowTemporaryScaffolding": true,
+    "scaffoldBlockNames": [
+      "cobblestone",
+      "stone",
+      "dirt",
+      "netherrack"
+    ],
+    "cleanupTemporaryBlocks": true,
+    "localRescanRadius": 40,
+    "maxBuildTasks": 5000000,
+    "correctMismatchedBlocks": true,
+    "accessRetryDelayMs": 400,
+    "accessStallLogIntervalMs": 15000,
+    "speed": 1,
+    "maxPlacementsPerSecond": 2.5,
+    "maxTowerHeight": 24,
+    "betweenActionsMs": 240,
+    "giveUpAfterMs": 45000,
+    "giveUpAttempts": 10,
+    "taskTimeoutMs": 35000,
+    "pauseBeforePower": false
+  },
+  "diagnostics": {
+    "logProtocolVersions": true,
+    "protocolPacketRingSize": 16,
+    "quietStartup": true
+  },
+  "planning": {
+    "architect": true,
+    "stripeWidth": 4
+  },
+  "motion": {
+    "enabled": true,
+    "maxYawDegPerTick": 30,
+    "maxPitchDegPerTick": 20,
+    "minKeyHoldMs": 80,
+    "maxSpeedPerTick": 0.36
+  },
+  "paths": {
+    "schematicsDir": "./schematics",
+    "stateDir": "./data"
+  },
+  "safety": {
+    "pauseOnLowHealth": true,
+    "minimumHealth": 8,
+    "recoveryLogThrottleMs": 3000,
+    "airborneToleranceMs": 2500,
+    "safeStartWaitMs": 6000,
+    "healCommand": "",
+    "autoEat": true,
+    "foodItem": "cooked_beef"
+  }
+}

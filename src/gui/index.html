@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Minecraft Human Builder — Cloud & VPS Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--bg:#14161a;--panel:#1d2026;--line:#2c3039;--tx:#e6e8eb;--mut:#9aa3ad;--ac:#4ea1ff;--ok:#3ecf8e;--bad:#ff6b6b;--warn:#f5a623}
+@media (prefers-color-scheme: light){:root{--bg:#f3f4f6;--panel:#fff;--line:#d9dde3;--tx:#1b1f24;--mut:#59636e}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,Segoe UI,sans-serif}
+header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+h1{font-size:17px;margin:0;flex:1;display:flex;align-items:center;gap:10px}
+.badge{font-size:11px;font-weight:500;padding:3px 8px;border-radius:999px;background:rgba(78,161,255,.14);color:var(--ac);border:1px solid rgba(78,161,255,.3)}
+main{max-width:920px;margin:0 auto;padding:16px;display:grid;gap:14px}
+section,details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+h2{font-size:13px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);display:flex;align-items:center;justify-content:space-between}
+summary{cursor:pointer;font-weight:600;color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:8px}
+label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--mut)}
+label.chk{flex-direction:row;align-items:center;gap:6px;font-size:13px;color:var(--tx)}
+input,select{background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:6px;padding:7px 9px;font:inherit;min-width:0}
+input[type=checkbox]{width:auto}
+button{background:var(--ac);color:#fff;border:0;border-radius:6px;padding:8px 14px;font:inherit;cursor:pointer;font-weight:500}
+button.sec{background:transparent;color:var(--tx);border:1px solid var(--line)}
+button.ok{background:var(--ok);color:#0d1a14}
+button.bad{background:var(--bad);color:#fff}
+button:disabled{opacity:.45;cursor:default}
+table{width:100%;border-collapse:collapse}td,th{padding:4px 6px;text-align:left;vertical-align:middle}th{font-size:12px;color:var(--mut);font-weight:500}
+.hint{color:var(--mut);font-size:12px;margin:6px 0 0}.st{font-size:12px}.ok{color:var(--ok)}.err{color:var(--bad)}
+#log{background:#0c0e11;color:#cfd6dd;font:12px/1.4 ui-monospace,Consolas,monospace;height:280px;overflow:auto;padding:8px;border-radius:6px;white-space:pre-wrap}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode{border:2px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;background:var(--panel);text-align:left;color:var(--tx)}
+.mode b{display:block;font-size:15px;margin-bottom:2px}.mode span{font-size:12px;color:var(--mut)}
+.mode.on{border-color:var(--ac)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--mut);display:inline-block;margin-right:6px}.dot.on{background:var(--ok)}
+.only-donut,.only-test{display:none}body.donut .only-donut{display:flex}body.test .only-test{display:flex}
+.stat-box{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--mut);flex:1;min-width:180px}
+.stat-box b{color:var(--tx);font-size:14px;display:block}
+@media(max-width:600px){.modes{grid-template-columns:1fr}}
+</style></head><body class="donut">
+<header>
+ <h1>Minecraft Human Builder <span id="sysBadge" class="badge">Loading host info...</span></h1>
+ <span id="status" class="st"></span>
+ <span class="st"><i id="dot" class="dot"></i><span id="runtxt">Bots stopped</span></span>
+ <button id="hdrDownloadZip" class="sec" title="Download learned/ and data/ folders as a single .zip file">⬇ Download Learned &amp; Data (.zip)</button>
+ <button id="hdrWipeData" class="bad" title="Delete all files inside learned/ and data/ for a fresh slate">🗑 Wipe Learned &amp; Data</button>
+ <button id="save">Save</button>
+</header>
+<main>
+
+<div class="modes">
+ <button class="mode" id="m-test" type="button"><b>Test server</b><span>Aternos / your own server. Bots use /give, cracked login works.</span></button>
+ <button class="mode on" id="m-donut" type="button"><b>DonutSMP (real server)</b><span>Bots buy everything from /shop and add missing items to it. Strict human rules.</span></button>
+</div>
+
+<section><h2>1 · Server</h2>
+<div class="row">
+ <label style="flex:1">Server address<input id="host" placeholder="play.example.net"></label>
+ <label>Port<input id="port" type="number" style="width:90px"></label>
+</div>
+<p class="hint" id="modeHint"></p>
+</section>
+
+<section><h2>2 · Accounts <span class="st">(one bot per ticked account — 5th bot auto-runs as Janitor/Sweeper)</span></h2>
+<table id="accounts"><thead><tr><th>On</th><th>In-game name</th><th>Role</th><th>Login</th><th id="secHead"></th><th></th></tr></thead><tbody></tbody></table>
+<div class="row" style="margin-top:8px"><button class="sec" id="addAcc">+ Add account</button></div>
+<p class="hint"><b>Role</b>: Leave on <b>Auto</b> so bots 1–4 build the schematic and the 5th bot automatically acts as the <b>Sweeper / Janitor</b> (using Ender Pearls to break temporary bridges/pillars), or manually set any account to Builder / Sweeper.</p>
+</section>
+
+<section><h2>3 · Build</h2>
+<div class="row">
+ <label style="flex:1">Schematic (files in schematics folder)<select id="schem"></select></label>
+ <label>Upload schematic<input id="schemUpload" type="file" accept=".litematic,.schem,.schematic,.nbt" style="display:none"><button type="button" class="sec" id="uploadBtn">+ Upload .litematic</button></label>
+ <label>X<input id="ox" type="number" style="width:90px"></label>
+ <label>Y<input id="oy" type="number" style="width:90px"></label>
+ <label>Z<input id="oz" type="number" style="width:90px"></label>
+ <label title="Turns the whole schematic on the spot. Leave at 0 unless the build faces the wrong way.">Turn build (degrees)<select id="rot"><option>0</option><option>90</option><option>180</option><option>270</option></select></label>
+ <label title="Optional layer number (0 = bottom) to continue from. Leave empty ('auto') to automatically detect completed bottom layers and continue where the build left off.">From layer<input id="startLayer" type="number" min="0" placeholder="auto" style="width:76px"></label>
+</div>
+<div class="row">
+ <button id="startBots">Continue last session</button>
+ <button id="startFresh" class="sec">Start fresh session</button>
+ <button id="stopBots" class="bad" style="display:none">Stop bots</button>
+ <button id="build" disabled>Start build</button>
+ <button id="continueBuild" class="ok" disabled title="Continue building this schematic at its exact X, Y, Z coordinates from where it left off (or from 'From layer') without rebuilding lower layers">▶ Continue build (from where left off)</button>
+ <button class="sec" id="pause" disabled>Pause</button>
+ <button class="sec" id="resume" disabled>Resume</button>
+ <button class="sec" id="stopBuild" disabled>Stop build</button>
+</div>
+<p class="hint" id="savedInfo"></p>
+<p class="hint">Start the bots, wait until they stand in the world, then enter the build corner (lowest north-west corner of the schematic) and press <b>Start build</b>, or press <b>▶ Continue build (from where left off)</b> to resume at the same X, Y, Z and skip completed lower layers.</p>
+</section>
+
+<section>
+ <h2>4 · Learned Memory &amp; Runtime Data</h2>
+ <div class="row">
+  <div class="stat-box"><b id="learnedStat">0 files (0 KB)</b><span>learned/ (BuildMemory, universal-memory, human-build-log)</span></div>
+  <div class="stat-box"><b id="dataStat">0 files (0 KB)</b><span>data/ (session.log, errors.log, incidents.jsonl, diagnosis, saved job)</span></div>
+ </div>
+ <div class="row" style="margin-top:10px">
+  <button id="downloadZipBtn" class="ok">⬇ Download Learned &amp; Data (.zip)</button>
+  <button id="wipeAllBtn" class="bad">🗑 Remove All Learned &amp; Data</button>
+  <button id="wipeLearnedBtn" class="sec">Remove Learned Only</button>
+  <button id="wipeDataOnlyBtn" class="sec">Remove Data / Logs Only</button>
+ </div>
+ <p class="hint">Download a single <code>.zip</code> snapshot of all logs, diagnosis reports, and learned placement memory at any time, or wipe <code>learned/</code> and <code>data/</code> before starting a clean test run.</p>
+</section>
+
+<details><summary>Advanced</summary>
+<div class="row" style="margin-top:12px">
+ <label>Game version (empty = auto)<input id="version" placeholder="auto" style="width:120px"></label>
+ <label class="chk"><input id="autoReconnect" type="checkbox">Auto reconnect</label>
+ <label>Your in-game name (lets you type !start, !pause, !resume, !stop in game)<input id="myName" placeholder="optional" style="width:220px"></label>
+ <label>Work speed<select id="pace"><option value="careful">Careful (slowest)</option><option value="fast">Fast</option><option value="max">Maximum (default, fastest a player can)</option></select></label>
+ <label>Pause when health below<input id="minHealth" type="number" min="1" max="19" style="width:90px"></label>
+</div>
+<div class="row only-donut">
+ <label>Tools to buy when missing (comma separated)<input id="tools" style="width:300px"></label>
+ <label>Food item<input id="food" style="width:150px"></label>
+ <label>Stacks per shop visit<input id="stacks" type="number" min="1" max="9" style="width:90px"></label>
+</div>
+<div class="row only-test">
+ <label>Tools to give when missing (comma separated)<input id="toolsT" style="width:300px"></label>
+ <label>Food item<input id="foodT" style="width:150px"></label>
+</div>
+<div class="row only-donut">
+ <label class="chk"><input id="allowPearls" type="checkbox">Use ender pearls</label>
+ <label class="chk"><input id="tpHomes" type="checkbox">Use /home /sethome (last resort)</label>
+ <label class="chk"><input id="tpTpa" type="checkbox">Use /tpa to a teammate (last resort)</label>
+</div>
+<div class="row only-test">
+ <label class="chk"><input id="allowPearlsT" type="checkbox">Use ender pearls</label>
+</div>
+<p class="hint">Timings, anti-cheat limits and shop menu handling are set by the program and need no tuning.</p>
+</details>
+
+<section><h2>Log <button class="sec" id="copyLog" style="float:right;padding:3px 10px;font-size:12px">Copy log</button></h2><div id="log"></div></section>
+</main>
+<script>
+const T='__GUI_TOKEN__';let S=null,next=0,mode='donut',running=false
+const $=id=>document.getElementById(id)
+const api=async(p,b)=>{const r=await fetch(p,{method:b?'POST':'GET',headers:{'x-gui-token':T,'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j}
+const msg=(t,bad)=>{$('status').textContent=t;$('status').className='st '+(bad?'err':'ok');setTimeout(()=>{if($('status').textContent===t)$('status').textContent=''},6000)}
+const fmtBytes=b=>b>=1048576?(b/1048576).toFixed(2)+' MB':b>=1024?(b/1024).toFixed(1)+' KB':b+' B'
+let accounts=[],prof={test:{host:'',port:25565},donut:{host:'',port:25565}}
+const HINT={test:'Aternos / test server: use the address without the port, e.g. name.aternos.me (port is usually 25565). The bots must be operators so /give works.',donut:'Real server: bots only use /shop, plus /home and /tpa as a last resort. No operator commands are ever sent.'}
+function updateStats(ds,sys){
+ if(ds){
+  $('learnedStat').textContent=`${ds.learnedFiles} file(s) (${fmtBytes(ds.learnedBytes)})`
+  $('dataStat').textContent=`${ds.dataFiles} file(s) (${fmtBytes(ds.dataBytes)})`
+ }
+ if(sys){
+  $('sysBadge').textContent=`${sys.cpus} vCPU · ${sys.totalRamGb} GB RAM${sys.isRender?' · Render Cloud':''}`
+ }
+}
+function stash(){prof[mode]={host:$('host').value.trim(),port:Number($('port').value)||25565}}
+function setMode(m,keep){if(!keep)stash();mode=m;document.body.className=m
+ $('m-test').classList.toggle('on',m==='test');$('m-donut').classList.toggle('on',m==='donut')
+ $('host').value=prof[m].host||'';$('port').value=prof[m].port||25565;$('host').placeholder=m==='test'?'yourserver.aternos.me':'play.example.net'
+ $('modeHint').textContent=HINT[m];drawAccounts()}
+$('m-test').onclick=()=>setMode('test');$('m-donut').onclick=()=>setMode('donut')
+function drawAccounts(){const tb=$('accounts').querySelector('tbody');tb.innerHTML='';$('secHead').textContent='Token / password'
+ accounts.forEach((a,i)=>{const tr=document.createElement('tr')
+  tr.innerHTML=`<td><input type=checkbox ${a.enabled?'checked':''} data-k=enabled></td>
+  <td><input data-k=username placeholder="exact in-game name"></td>
+  <td><select data-k=role><option value=auto>Auto</option><option value=builder>Builder</option><option value=sweeper>Sweeper (5th)</option></select></td>
+  <td><select data-k=mode><option value=microsoft>Microsoft</option><option value=session>Session token</option><option value=offline>Cracked</option></select></td>
+  <td style="white-space:nowrap"><input data-k=secret type=password style="width:140px"> <button class=sec data-act=verify>Verify</button></td>
+  <td><button class=sec data-act=del title="Remove">✕</button></td>`
+  tr.querySelector('[data-k=mode]').value=a.mode;tr.querySelector('[data-k=username]').value=a.username;tr.querySelector('[data-k=role]').value=a.role||'auto'
+  const sin=tr.querySelector('[data-k=secret]'),vb=tr.querySelector('[data-act=verify]')
+  const sync=()=>{sin.style.visibility=a.mode==='microsoft'?'hidden':'visible';vb.style.display=a.mode==='session'?'':'none'
+   sin.placeholder=a.mode==='offline'?(a.hasPassword?'password saved':'password (optional)'):(a.hasToken?'token saved':'paste token')
+   sin.value=a.mode==='offline'?(a.password||''):(a.accessToken||'')};sync()
+  tr.addEventListener('input',e=>{const k=e.target.dataset.k;if(!k)return
+   if(k==='secret'){if(a.mode==='offline')a.password=e.target.value;else a.accessToken=e.target.value}
+   else{a[k]=e.target.type==='checkbox'?e.target.checked:e.target.value;if(k==='mode')sync()}})
+  tr.addEventListener('click',async e=>{const act=e.target.dataset.act;if(act==='del'){accounts.splice(i,1);drawAccounts()}
+   if(act==='verify'){try{const j=await api('/api/verify',a.accessToken?{accessToken:a.accessToken}:{index:i});a.username=j.name;msg('Token belongs to '+j.name);drawAccounts()}catch(x){msg('Verify failed: '+x.message,1)}}})
+  tb.appendChild(tr)})}
+$('addAcc').onclick=()=>{accounts.push({enabled:true,mode:mode==='test'?'offline':'microsoft',role:'auto',username:'',hasToken:false});drawAccounts()}
+function fill(){const s=S.settings
+ prof={test:{host:'',port:25565},donut:{host:'',port:25565},...(s.serverProfiles||{})}
+ const m=s.mode==='test'?'test':'donut';prof[m]={host:s.server.host||'',port:s.server.port||25565}
+ $('version').value=s.server.version||'';$('autoReconnect').checked=s.server.autoReconnect!==false;$('minHealth').value=s.safety.minimumHealth;$('pace').value=s.human.pace||'max';$('myName').value=(s.control.allowedUsers||[]).join(', ')
+ $('stacks').value=s.shop.stacksPerVisit;const tools=(s.materials.toolItems||[]).join(', ');$('tools').value=tools;$('toolsT').value=tools
+ $('food').value=$('foodT').value=s.materials.foodItem||'';$('allowPearls').checked=$('allowPearlsT').checked=s.human.allowPearls!==false
+ $('tpHomes').checked=s.teleport.homes!==false;$('tpTpa').checked=s.teleport.tpa!==false
+ const sel=$('schem');sel.innerHTML='';S.schematics.forEach(f=>{const o=document.createElement('option');o.textContent=f;sel.appendChild(o)})
+ if(s.control.defaultSchematic)sel.value=s.control.defaultSchematic
+ accounts=S.accounts.map(a=>({...a}));setMode(m,true);updateStats(S.dataStats,S.system)}
+const list=v=>v.split(',').map(x=>x.trim()).filter(Boolean)
+function collect(){stash();const d=mode==='donut',h=prof[mode]
+ return{mode,settings:{serverProfiles:prof,server:{host:h.host,port:h.port,version:$('version').value.trim(),autoReconnect:$('autoReconnect').checked},
+  shop:{stacksPerVisit:Number($('stacks').value)||3},
+  materials:{toolItems:list(d?$('tools').value:$('toolsT').value),foodItem:(d?$('food').value:$('foodT').value).trim()||'cooked_beef'},
+  human:{pace:$('pace').value,allowPearls:(d?$('allowPearls'):$('allowPearlsT')).checked},
+  teleport:{homes:$('tpHomes').checked,tpa:$('tpTpa').checked},safety:{minimumHealth:Number($('minHealth').value)||8},
+  control:{defaultSchematic:$('schem').value,allowedUsers:list($('myName').value),chatCommands:list($('myName').value).length>0}},
+  accounts:accounts.map(a=>({enabled:a.enabled,mode:a.mode,role:a.role||'auto',username:a.username,accessToken:a.mode==='session'?a.accessToken:undefined,password:a.mode==='offline'?a.password:undefined}))}}
+function showSaved(j){const b=$('startBots');const prog=j&&j.total?` (${j.completed||0}/${j.total} blocks saved)`:'';b.title=j?`Saved: ${j.file} at ${j.origin?.x}, ${j.origin?.y}, ${j.origin?.z}${prog}`:'No saved build yet: starts the bots and waits for Start build';$('savedInfo').textContent=j?`Saved build location: ${j.file} at X=${j.origin?.x}, Y=${j.origin?.y}, Z=${j.origin?.z} (rot ${j.rotation||0})${prog}${j.startLayer!=null?' · from layer '+j.startLayer:''}`:'No saved session.'
+ if(j&&j.origin){
+  if($('ox').value===''&&$('oy').value===''&&$('oz').value===''){
+   $('ox').value=j.origin.x;$('oy').value=j.origin.y;$('oz').value=j.origin.z;$('rot').value=String(j.rotation||0)
+   if(j.file&&[...$('schem').options].some(o=>o.value===j.file))$('schem').value=j.file
+  }
+  if($('startLayer').value===''&&j.startLayer!=null)$('startLayer').value=j.startLayer
+ }
+}
+async function save(){try{if(!$('host').value.trim())throw new Error('Enter the server address first');await api('/api/save',collect());S=await api('/api/state');fill();showSaved(S.saved);msg('Saved');return true}catch(e){msg(e.message,1);return false}}
+$('save').onclick=save
+function setRunning(r){running=r;$('dot').className='dot'+(r?' on':'');$('runtxt').textContent=r?'Bots running':'Bots stopped';for(const id of ['startBots','startFresh'])$(id).style.display=r?'none':'';$('stopBots').style.display=r?'':'none'
+ for(const id of ['build','continueBuild','pause','resume','stopBuild'])$(id).disabled=!r}
+const begin=async fresh=>{if(await save()){const j=await api('/api/start-bots',{fresh});msg(j.ok?'Bots starting':'Bots already running',!j.ok)}}
+$('startBots').onclick=()=>begin(false)
+$('startFresh').onclick=()=>{if(confirm('Forget the saved build and progress and start from scratch?'))begin(true)}
+$('stopBots').onclick=async()=>{await api('/api/stop-bots',{});msg('Stopping bots')}
+const cmd=async c=>{try{const j=await api('/api/cmd',{cmd:c});msg(j.ok?'Sent':'Bots are not running',!j.ok)}catch(e){msg(e.message,1)}}
+$('build').onclick=async()=>{if(!(await save()))return;const f=$('schem').value;const x=$('ox').value,y=$('oy').value,z=$('oz').value,sl=$('startLayer').value.trim()
+ if(!f||x===''||y===''||z==='')return msg('Pick a schematic and enter X, Y, Z',1);cmd(`build ${f} ${x} ${y} ${z} ${$('rot').value}${sl!==''?' '+sl:''}`)}
+$('continueBuild').onclick=async()=>{if(!(await save()))return
+ if(($('ox').value===''||$('oy').value===''||$('oz').value==='')&&S?.saved?.origin){
+  $('ox').value=S.saved.origin.x;$('oy').value=S.saved.origin.y;$('oz').value=S.saved.origin.z;$('rot').value=String(S.saved.rotation||0)
+  if(S.saved.file&&[...$('schem').options].some(o=>o.value===S.saved.file))$('schem').value=S.saved.file
+ }
+ const f=$('schem').value||(S?.saved?.file||'');const x=$('ox').value,y=$('oy').value,z=$('oz').value,sl=$('startLayer').value.trim()
+ if(!f||x===''||y===''||z==='')return msg('No saved coordinates found — pick a schematic and enter X, Y, Z first',1)
+ cmd(`continue ${f} ${x} ${y} ${z} ${$('rot').value}${sl!==''?' '+sl:''}`)}
+$('copyLog').onclick=async()=>{try{await navigator.clipboard.writeText($('log').textContent);msg('Log copied')}catch{const r=document.createRange();r.selectNodeContents($('log'));getSelection().removeAllRanges();getSelection().addRange(r);msg('Press Ctrl+C to copy')}}
+$('pause').onclick=()=>cmd('pause');$('resume').onclick=()=>cmd('resume');$('stopBuild').onclick=()=>cmd('stop')
+
+// Download learned/ + data/ as .zip
+function triggerDownloadZip(){
+ const a=document.createElement('a')
+ a.href='/api/download-data-zip?token='+encodeURIComponent(T)
+ a.download=''
+ document.body.appendChild(a);a.click();a.remove()
+ msg('Downloading learned/ and data/ (.zip)...')
+}
+$('downloadZipBtn').onclick=triggerDownloadZip
+$('hdrDownloadZip').onclick=triggerDownloadZip
+
+// Wipe learned/ and/or data/
+async function wipeTarget(target,label){
+ if(!confirm(`Are you sure you want to permanently delete ${label}?${running?' (Running bots will be stopped first.)':''}`))return
+ try{
+  const j=await api('/api/clear-data',{target})
+  updateStats(j.dataStats)
+  S=await api('/api/state');showSaved(S.saved)
+  msg(`Removed ${j.removedCount} file(s) from ${label}`)
+ }catch(e){msg(e.message,1)}
+}
+$('wipeAllBtn').onclick=()=>wipeTarget('all','all files in learned/ and data/')
+$('hdrWipeData').onclick=()=>wipeTarget('all','all files in learned/ and data/')
+$('wipeLearnedBtn').onclick=()=>wipeTarget('learned','learned/')
+$('wipeDataOnlyBtn').onclick=()=>wipeTarget('data','data/ and logs')
+
+// Upload schematic directly from browser
+$('uploadBtn').onclick=()=>$('schemUpload').click()
+$('schemUpload').onchange=async e=>{
+ const file=e.target.files?.[0];if(!file)return
+ try{
+  const buf=await file.arrayBuffer()
+  const bytes=new Uint8Array(buf)
+  let bin=''
+  for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192))
+  const j=await api('/api/upload-schematic',{name:file.name,base64:btoa(bin)})
+  const sel=$('schem');sel.innerHTML=''
+  j.schematics.forEach(f=>{const o=document.createElement('option');o.textContent=f;sel.appendChild(o)})
+  sel.value=j.name
+  msg('Uploaded '+j.name)
+ }catch(err){msg('Upload failed: '+err.message,1)}
+ e.target.value=''
+}
+
+async function poll(){try{const j=await api('/api/logs?since='+next);next=j.next;setRunning(Boolean(j.running));if(j.dataStats)updateStats(j.dataStats);if(j.lines.length){const el=$('log');const atEnd=el.scrollTop+el.clientHeight>=el.scrollHeight-20;el.textContent+=j.lines.join('\n')+'\n';if(el.textContent.length>200000)el.textContent=el.textContent.slice(-120000);if(atEnd)el.scrollTop=el.scrollHeight}}catch{}setTimeout(poll,1200)}
+api('/api/state').then(s=>{S=s;fill();setRunning(s.running);showSaved(s.saved);poll()}).catch(e=>msg(e.message,1))
+</script></body></html>

@@ -1,0 +1,562 @@
+{
+  "schematic": "Tree Gaming Cobblestone Wall Farm.litematic",
+  "size": {
+    "x": 41,
+    "y": 26,
+    "z": 35
+  },
+  "totalTasks": 5988,
+  "fluidCellsCount": 2730,
+  "census": {
+    "ignored": {},
+    "skippedAir": 30396,
+    "derived": 1476,
+    "unsupported": [],
+    "byKind": {
+      "block": 5176,
+      "fluid": 262,
+      "waterlog": 550
+    },
+    "byPhase": {
+      "0": 4807,
+      "1": 357,
+      "3": 12,
+      "5": 208,
+      "6": 54
+    },
+    "lookUp": 180
+  },
+  "materialDemand": {
+    "soul_sand": 1,
+    "packed_ice": 260,
+    "glass": 132,
+    "spruce_fence_gate": 9,
+    "water_bucket": 193,
+    "spruce_sign": 4,
+    "chest": 14,
+    "crafter": 7,
+    "hopper": 6,
+    "iron_trapdoor": 1,
+    "smooth_stone": 53,
+    "redstone": 77,
+    "oak_leaves": 142,
+    "white_stained_glass": 100,
+    "cobblestone": 405,
+    "lava_bucket": 13,
+    "piston": 48,
+    "tripwire_hook": 4,
+    "string": 1,
+    "observer": 6,
+    "dropper": 1,
+    "redstone_torch": 2,
+    "oak_fence": 4,
+    "oak_sign": 2,
+    "tnt": 2
+  },
+  "architectReport": {
+    "tasks": 5988,
+    "layers": 43,
+    "pieces": 237,
+    "walkBlocks": 10327,
+    "estimatedMinutes": 392,
+    "floating": 73,
+    "soilProblems": 0,
+    "warnings": [
+      "73 blocks have no neighbour block in the schematic (they will need scaffold/reference blocks)"
+    ],
+    "materials": [
+      [
+        "cobblestone",
+        1620
+      ],
+      [
+        "packed_ice",
+        1191
+      ],
+      [
+        "water_bucket",
+        758
+      ],
+      [
+        "oak_leaves",
+        549
+      ],
+      [
+        "white_stained_glass",
+        413
+      ],
+      [
+        "glass",
+        398
+      ],
+      [
+        "redstone",
+        295
+      ],
+      [
+        "smooth_stone",
+        241
+      ],
+      [
+        "piston",
+        198
+      ],
+      [
+        "chest",
+        58
+      ],
+      [
+        "lava_bucket",
+        54
+      ],
+      [
+        "crafter",
+        29
+      ],
+      [
+        "hopper",
+        29
+      ],
+      [
+        "observer",
+        28
+      ],
+      [
+        "spruce_fence_gate",
+        23
+      ],
+      [
+        "tripwire_hook",
+        18
+      ],
+      [
+        "spruce_sign",
+        16
+      ],
+      [
+        "redstone_torch",
+        10
+      ],
+      [
+        "repeater",
+        9
+      ],
+      [
+        "string",
+        9
+      ],
+      [
+        "dropper",
+        9
+      ],
+      [
+        "oak_fence",
+        9
+      ],
+      [
+        "oak_sign",
+        9
+      ],
+      [
+        "tnt",
+        9
+      ],
+      [
+        "lever",
+        2
+      ],
+      [
+        "soul_sand",
+        1
+      ],
+      [
+        "iron_trapdoor",
+        1
+      ],
+      [
+        "redstone_lamp",
+        1
+      ],
+      [
+        "comparator",
+        1
+      ]
+    ]
+  },
+  "layerSchedule": [
+    {
+      "layer": 0,
+      "yOffset": 0,
+      "blocks": 35,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "soul_sand": 1,
+        "packed_ice": 34
+      }
+    },
+    {
+      "layer": 1,
+      "yOffset": 1,
+      "blocks": 76,
+      "fluids": 4,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "glass": 72,
+        "spruce_fence_gate": 4,
+        "water": 4
+      }
+    },
+    {
+      "layer": 2,
+      "yOffset": 2,
+      "blocks": 358,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "glass": 4,
+        "packed_ice": 354
+      }
+    },
+    {
+      "layer": 3,
+      "yOffset": 3,
+      "blocks": 922,
+      "fluids": 56,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "glass": 106,
+        "packed_ice": 800,
+        "spruce_fence_gate": 16,
+        "water": 56
+      }
+    },
+    {
+      "layer": 4,
+      "yOffset": 4,
+      "blocks": 188,
+      "fluids": 136,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "glass": 172,
+        "water": 136,
+        "spruce_wall_sign": 16
+      }
+    },
+    {
+      "layer": 5,
+      "yOffset": 5,
+      "blocks": 122,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "glass": 3,
+        "chest": 58,
+        "crafter": 29,
+        "hopper": 29,
+        "packed_ice": 3
+      }
+    },
+    {
+      "layer": 6,
+      "yOffset": 6,
+      "blocks": 75,
+      "fluids": 3,
+      "waterlogs": 1,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "glass": 41,
+        "iron_trapdoor": 2,
+        "lever": 1,
+        "smooth_stone": 29,
+        "spruce_fence_gate": 3,
+        "water": 3
+      }
+    },
+    {
+      "layer": 7,
+      "yOffset": 7,
+      "blocks": 39,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "redstone_wire": 35,
+        "observer": 1,
+        "repeater": 3
+      }
+    },
+    {
+      "layer": 8,
+      "yOffset": 8,
+      "blocks": 63,
+      "fluids": 0,
+      "waterlogs": 63,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "oak_leaves": 126
+      }
+    },
+    {
+      "layer": 9,
+      "yOffset": 9,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 10,
+      "yOffset": 10,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 11,
+      "yOffset": 11,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 12,
+      "yOffset": 12,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 13,
+      "yOffset": 13,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 14,
+      "yOffset": 14,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 15,
+      "yOffset": 15,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 16,
+      "yOffset": 16,
+      "blocks": 270,
+      "fluids": 0,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108
+      }
+    },
+    {
+      "layer": 17,
+      "yOffset": 17,
+      "blocks": 270,
+      "fluids": 54,
+      "waterlogs": 54,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 36,
+        "cobblestone": 180,
+        "oak_leaves": 108,
+        "lava": 54
+      }
+    },
+    {
+      "layer": 18,
+      "yOffset": 18,
+      "blocks": 261,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 180,
+      "redstone": 0,
+      "items": {
+        "piston": 180,
+        "smooth_stone": 81
+      }
+    },
+    {
+      "layer": 19,
+      "yOffset": 19,
+      "blocks": 207,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 9,
+      "items": {
+        "redstone_wire": 153,
+        "white_stained_glass": 9,
+        "tripwire_hook": 18,
+        "tripwire": 9,
+        "observer": 9,
+        "dropper": 9
+      }
+    },
+    {
+      "layer": 20,
+      "yOffset": 20,
+      "blocks": 9,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 9,
+      "items": {
+        "redstone_torch": 9
+      }
+    },
+    {
+      "layer": 21,
+      "yOffset": 21,
+      "blocks": 27,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 18,
+        "smooth_stone": 9
+      }
+    },
+    {
+      "layer": 22,
+      "yOffset": 22,
+      "blocks": 137,
+      "fluids": 9,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "white_stained_glass": 44,
+        "smooth_stone": 74,
+        "water": 9,
+        "oak_fence": 9,
+        "oak_wall_sign": 9,
+        "redstone_lamp": 1
+      }
+    },
+    {
+      "layer": 23,
+      "yOffset": 23,
+      "blocks": 146,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 29,
+      "items": {
+        "smooth_stone": 21,
+        "redstone_wire": 62,
+        "piston": 18,
+        "tnt": 9,
+        "observer": 18,
+        "white_stained_glass": 9,
+        "repeater": 6,
+        "redstone_torch": 1,
+        "comparator": 1,
+        "lever": 1
+      }
+    },
+    {
+      "layer": 24,
+      "yOffset": 24,
+      "blocks": 45,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "redstone_wire": 9,
+        "smooth_stone": 27,
+        "white_stained_glass": 9
+      }
+    },
+    {
+      "layer": 25,
+      "yOffset": 25,
+      "blocks": 36,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "redstone_wire": 36
+      }
+    }
+  ]
+}

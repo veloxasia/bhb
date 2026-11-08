@@ -1,0 +1,390 @@
+{
+  "schematic": "cobble.litematic",
+  "size": {
+    "x": 17,
+    "y": 14,
+    "z": 14
+  },
+  "totalTasks": 897,
+  "fluidCellsCount": 125,
+  "census": {
+    "ignored": {
+      "bedrock": 236
+    },
+    "skippedAir": 2202,
+    "derived": 52,
+    "unsupported": [],
+    "byKind": {
+      "block": 834,
+      "fluid": 8,
+      "waterlog": 55
+    },
+    "byPhase": {
+      "0": 821,
+      "1": 11,
+      "3": 2,
+      "5": 2,
+      "6": 6
+    },
+    "lookUp": 2
+  },
+  "materialDemand": {
+    "dirt": 449,
+    "grass_block": 163,
+    "hopper": 10,
+    "chest": 20,
+    "water_bucket": 57,
+    "oak_leaves": 60,
+    "smooth_stone_slab": 13,
+    "oak_trapdoor": 4,
+    "barrel": 1,
+    "cobblestone": 76,
+    "ladder": 4,
+    "lava_bucket": 6,
+    "obsidian": 1,
+    "note_block": 3,
+    "smooth_stone": 8,
+    "observer": 8,
+    "redstone": 3,
+    "piston": 3,
+    "tnt": 1,
+    "lever": 1,
+    "repeater": 4,
+    "stone_button": 1,
+    "sand": 1
+  },
+  "architectReport": {
+    "tasks": 897,
+    "layers": 37,
+    "pieces": 50,
+    "walkBlocks": 1713,
+    "estimatedMinutes": 59,
+    "floating": 2,
+    "soilProblems": 0,
+    "warnings": [
+      "2 blocks have no neighbour block in the schematic (they will need scaffold/reference blocks)"
+    ],
+    "materials": [
+      [
+        "dirt",
+        449
+      ],
+      [
+        "grass_block",
+        163
+      ],
+      [
+        "cobblestone",
+        76
+      ],
+      [
+        "oak_leaves",
+        60
+      ],
+      [
+        "water_bucket",
+        57
+      ],
+      [
+        "chest",
+        20
+      ],
+      [
+        "smooth_stone_slab",
+        13
+      ],
+      [
+        "hopper",
+        10
+      ],
+      [
+        "smooth_stone",
+        8
+      ],
+      [
+        "observer",
+        8
+      ],
+      [
+        "lava_bucket",
+        6
+      ],
+      [
+        "oak_trapdoor",
+        4
+      ],
+      [
+        "ladder",
+        4
+      ],
+      [
+        "repeater",
+        4
+      ],
+      [
+        "note_block",
+        3
+      ],
+      [
+        "redstone",
+        3
+      ],
+      [
+        "piston",
+        3
+      ],
+      [
+        "barrel",
+        1
+      ],
+      [
+        "obsidian",
+        1
+      ],
+      [
+        "tnt",
+        1
+      ],
+      [
+        "lever",
+        1
+      ],
+      [
+        "stone_button",
+        1
+      ],
+      [
+        "sand",
+        1
+      ]
+    ]
+  },
+  "layerSchedule": [
+    {
+      "layer": 0,
+      "yOffset": 0,
+      "blocks": 2,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 1,
+        "grass_block": 1
+      }
+    },
+    {
+      "layer": 1,
+      "yOffset": 1,
+      "blocks": 237,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 207,
+        "hopper": 10,
+        "chest": 20
+      }
+    },
+    {
+      "layer": 2,
+      "yOffset": 2,
+      "blocks": 217,
+      "fluids": 1,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 200,
+        "grass_block": 7,
+        "water_bucket": 1,
+        "oak_leaves": 10
+      }
+    },
+    {
+      "layer": 3,
+      "yOffset": 3,
+      "blocks": 193,
+      "fluids": 1,
+      "waterlogs": 4,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 31,
+        "grass_block": 155,
+        "smooth_stone_slab": 4,
+        "water_bucket": 5,
+        "oak_trapdoor": 1,
+        "oak_leaves": 1,
+        "barrel": 1
+      }
+    },
+    {
+      "layer": 4,
+      "yOffset": 4,
+      "blocks": 37,
+      "fluids": 0,
+      "waterlogs": 11,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "dirt": 1,
+        "oak_leaves": 11,
+        "water_bucket": 11,
+        "cobblestone": 24,
+        "ladder": 1
+      }
+    },
+    {
+      "layer": 5,
+      "yOffset": 5,
+      "blocks": 36,
+      "fluids": 0,
+      "waterlogs": 10,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "dirt": 1,
+        "oak_leaves": 10,
+        "water_bucket": 10,
+        "cobblestone": 24,
+        "ladder": 1
+      }
+    },
+    {
+      "layer": 6,
+      "yOffset": 6,
+      "blocks": 16,
+      "fluids": 0,
+      "waterlogs": 10,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "dirt": 1,
+        "oak_leaves": 10,
+        "water_bucket": 10,
+        "cobblestone": 4,
+        "ladder": 1
+      }
+    },
+    {
+      "layer": 7,
+      "yOffset": 7,
+      "blocks": 36,
+      "fluids": 6,
+      "waterlogs": 10,
+      "lookUp": 0,
+      "redstone": 1,
+      "items": {
+        "dirt": 1,
+        "oak_leaves": 10,
+        "water_bucket": 10,
+        "cobblestone": 24,
+        "lava_bucket": 6,
+        "ladder": 1
+      }
+    },
+    {
+      "layer": 8,
+      "yOffset": 8,
+      "blocks": 11,
+      "fluids": 0,
+      "waterlogs": 9,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 1,
+        "oak_leaves": 8,
+        "water_bucket": 9,
+        "obsidian": 1,
+        "oak_trapdoor": 1
+      }
+    },
+    {
+      "layer": 9,
+      "yOffset": 9,
+      "blocks": 10,
+      "fluids": 0,
+      "waterlogs": 1,
+      "lookUp": 1,
+      "redstone": 3,
+      "items": {
+        "dirt": 1,
+        "note_block": 1,
+        "smooth_stone": 3,
+        "observer": 3,
+        "oak_trapdoor": 1,
+        "water_bucket": 1,
+        "smooth_stone_slab": 1
+      }
+    },
+    {
+      "layer": 10,
+      "yOffset": 10,
+      "blocks": 12,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 5,
+      "items": {
+        "dirt": 1,
+        "smooth_stone": 2,
+        "redstone": 2,
+        "piston": 2,
+        "observer": 1,
+        "tnt": 1,
+        "smooth_stone_slab": 3
+      }
+    },
+    {
+      "layer": 11,
+      "yOffset": 11,
+      "blocks": 14,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 1,
+      "redstone": 7,
+      "items": {
+        "dirt": 1,
+        "redstone": 1,
+        "observer": 4,
+        "oak_trapdoor": 1,
+        "note_block": 1,
+        "piston": 1,
+        "smooth_stone_slab": 4,
+        "lever": 1
+      }
+    },
+    {
+      "layer": 12,
+      "yOffset": 12,
+      "blocks": 11,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 5,
+      "items": {
+        "dirt": 1,
+        "note_block": 1,
+        "smooth_stone_slab": 1,
+        "repeater": 4,
+        "smooth_stone": 3,
+        "stone_button": 1
+      }
+    },
+    {
+      "layer": 13,
+      "yOffset": 13,
+      "blocks": 2,
+      "fluids": 0,
+      "waterlogs": 0,
+      "lookUp": 0,
+      "redstone": 0,
+      "items": {
+        "dirt": 1,
+        "sand": 1
+      }
+    }
+  ]
+}

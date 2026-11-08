@@ -1,0 +1,7 @@
+{
+  "accounts": [
+    { "enabled": true, "mode": "microsoft", "username": "YourIngameName" },
+    { "enabled": false, "mode": "session", "username": "YourIngameName", "accessToken": "paste token here (or use the GUI)" },
+    { "enabled": false, "mode": "offline", "username": "SomeCrackedName" }
+  ]
+}

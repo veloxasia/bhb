@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: minecraft-human-builder
+    runtime: node
+    plan: standard
+    buildCommand: npm install --no-audit --no-fund
+    startCommand: node start-render.js
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=8192
+      - key: MHB_GUI_HOST
+        value: 0.0.0.0
+      - key: MHB_STATE_DIR
+        value: ./data

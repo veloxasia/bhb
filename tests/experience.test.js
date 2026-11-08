@@ -1,0 +1,16 @@
+'use strict'
+const test = require('node:test')
+const assert = require('node:assert')
+const os = require('os'); const fs = require('fs'); const path = require('path')
+const { Experience } = require('../src/learning/learner')
+test('experience biases failing rules and persists', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'exp-'))
+  const e = new Experience(dir)
+  for (let i = 0; i < 5; i++) e.record('a|up|0', false, 4.8)
+  for (let i = 0; i < 5; i++) e.record('b|up|0', true, 2)
+  assert.ok(e.bias('a|up|0') > e.bias('b|up|0'))
+  assert.ok(e.reachPenalty() >= 0)
+  e.save()
+  const f = new Experience(dir); f.load()
+  assert.ok(f.bias('a|up|0') > 0)
+})
